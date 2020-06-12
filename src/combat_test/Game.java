@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     private CombatTest combatTest;
 
     private Game() {
-        window = new Window(TITLE, 3, this);
+        window = new Window(TITLE, 2, this);
         addKeyListener(this);
         addMouseListener(this);
         requestFocus();
