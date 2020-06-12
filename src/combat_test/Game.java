@@ -21,6 +21,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     private static Point previousMouseLocation;
 
     private CombatTest combatTest;
+    int frames;
 
     private Game() {
         window = new Window(TITLE, 2, this);
@@ -31,6 +32,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         previousMouseLocation = mouseLocation();
         running = true;
         thread = new Thread(this);
+        frames = 0;
         thread.start();
     }
 
@@ -43,7 +45,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     }
 
     public void run() {
-        start();
 
         long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
@@ -55,6 +56,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         int updates = 0;
         //Allows for the logging of the ticks and frames each second
         //Game Loop\\
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        start();
         while (running)
         //Boolean which controls the running of the game loop. Were it to equal false, the game would simply freeze.
         {
@@ -76,6 +83,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
             if (System.currentTimeMillis() - timer >= 1000) {
                 System.out.println("FPS: " + frames + ", Ticks: " + updates);
                 updates = 0;
+                this.frames = frames;
                 frames = 0;
                 timer += 1000;
                 //Logs the Frames and the ticks that have passed since the last logging. The minimum time between each
@@ -121,6 +129,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, window.getWidth(), window.getHeight());
         combatTest.render(g);
+        g.setColor(Color.WHITE);
+        g.setFont(g.getFont().deriveFont(40.0f));
+        g.drawString(String.valueOf(frames), 100, 100);
         g.dispose();
         bs.show();
     }

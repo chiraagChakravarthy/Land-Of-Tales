@@ -44,13 +44,13 @@ public class Magic {
                 t = Math.atan2(o, a);
         if(mousePressed){
             for (int i = 0; i < 100; i++) {
-                double t1 = t+(Math.random()-0.5)/5;
-                pixels.add(new Pixel((short)(Math.round(Erf.erfInv(Math.random()*2-1))+Game.getInstance().getGameWidth()/10), (short)(Math.round(Erf.erfInv(Math.random()*2-1))), (float) (Math.cos(t)*5), (float)(Math.sin(t)*5), (byte)(Math.random()<.5?1:0), (short)(150), this));
+                double t1 = t;
+                pixels.add(new Pixel((short)(Math.round(Erf.erfInv(Math.random()*2-1))+Game.getInstance().getGameWidth()/10), (short)(Math.round(Erf.erfInv(Math.random()*2-1))), (float) (Math.cos(t1))*5, (float)(Math.sin(t1))*5, (byte)(Math.random()<.5?1:0), (short)(150), this));
             }
         }
         time++;
         for (int i = 0; i < 100; i++) {
-            double t1 = Math.sin(time/60.0);
+            double t1 = Math.sin(time/60.0)*0;
             enemyPixels.add(new EnemyPixel((short)(Math.round(Erf.erfInv(Math.random()*2-1))-Game.getInstance().getGameWidth()/10), (short)(Math.round(Erf.erfInv(Math.random()*2-1))), (float) (Math.cos(t1)*5), (float)(Math.sin(t1)*5), (byte)(Math.random()<.5?1:0), (short)(150), this));
         }
         pixels.removeAll(removedPixels);

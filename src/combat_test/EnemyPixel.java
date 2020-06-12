@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class EnemyPixel {
+    private static final byte COLLISION_TIME = (byte)(Byte.MIN_VALUE+30);
     public short x, y;
     public float vX, vY;
     private byte color, time;
@@ -40,8 +41,8 @@ public class EnemyPixel {
                     collidedPixel.vY = vY = (this.vY + collidedPixel.vY)/2;
                     //vX = -vX;
                     //vY = -vY;
-                    time = (byte) Math.min(time, Byte.MIN_VALUE+30);
-                    collidedPixel.time = (byte)Math.min(collidedPixel.time, Byte.MIN_VALUE+30);
+                    time = (byte) Math.min(COLLISION_TIME, time);
+                    collidedPixel.time = (byte) Math.min(COLLISION_TIME, collidedPixel.time);
                 }
             }
         }
